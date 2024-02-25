@@ -26,7 +26,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDto getEmployeeId(Long employeeId) {
+    public EmployeeDto getEmployeeById(Long employeeId) {
         return employeeRepository.findById(employeeId)
                 .map(EmployeeMapper::mapToEmployeeDto)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee with id " + employeeId + " does not exist"));
