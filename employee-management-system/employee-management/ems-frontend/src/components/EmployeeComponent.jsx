@@ -1,6 +1,6 @@
-import { useState } from "react"
-import { createEmployee } from "../services/EmployeeService"
-import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { createEmployee, getEmployee, updateEmployee } from "../services/EmployeeService"
+import { useNavigate, useParams } from "react-router-dom"
 
 const EmployeeComponent = () => {
 
@@ -12,12 +12,23 @@ const EmployeeComponent = () => {
 
     const navigator = useNavigate();
 
+    /* get the employee id from the url using useParams hook */
+    const { id } = useParams();
+
     /* Initialize state variables that will hold validation errors */
     const [errors, setErrors] = useState({
         firstName: "",
         lastName: "",
         email: ""
     })
+
+    const pageTitle = () => {
+        if (id) {
+            return <h2 className="text-center">Update Employee</h2>
+        } else {
+            return <h2 className="text-center">Add Employee</h2>
+        }
+    }
 
     const validateForm = () => {
         
@@ -58,17 +69,40 @@ const EmployeeComponent = () => {
 
     const handleEmail = (e) => setEmail(e.target.value)*/ 
 
-    const saveEmployee = (e) => {
+    const saveOrUpdateEmployee = (e) => {
         e.preventDefault();
         if (validateForm()) {
             const employee = { firstName, lastName, email }
             console.log(employee)
-            createEmployee(employee).then((response) => {
-                console.log(response.data);
-                navigator("/employees");
-            })
+            if (id) {
+                updateEmployee(id, employee).then((response) => {
+                    console.log(response.data);
+                    navigator('/employees');
+                }).catch(error => {
+                    console.error(error);
+                })
+            } else {
+                createEmployee(employee).then((response) => {
+                    console.log(response.data);
+                    navigator("/employees");
+                }).catch(error => {
+                    console.error(error);
+                })
+            }
         }
     }
+
+    useEffect(() => {
+        if (id) {
+            getEmployee(id).then((response) => {
+                setFirstName(response.data.firstName);
+                setLastName(response.data.lastName);
+                setEmail(response.data.email);
+            }).catch(error => {
+                console.error(error);
+            })
+        }
+    }, [id])
 
     return (
         <div className="container">
@@ -76,7 +110,9 @@ const EmployeeComponent = () => {
             <br></br>
             <div className="row">
                 <div className="card col-md-6 offset-md-3 offset-md-3">
-                    <h2 className="text-center">Add Employee</h2>
+                    {
+                        pageTitle()
+                    }
                     <div className="card-body">
                         <form>
                             <div className="form-group mb-2">
@@ -121,7 +157,7 @@ const EmployeeComponent = () => {
                                 </input>
                                 { errors.email && <div className="invalid-feedback">{errors.email}</div> }
                             </div>
-                            <button className="btn btn-success" onClick={saveEmployee}>Submit</button>
+                            <button className="btn btn-success" onClick={saveOrUpdateEmployee}>Submit</button>
                         </form>
                     </div>
                 </div>
