@@ -3,13 +3,13 @@ import { listEmployees } from "../services/EmployeeService";
 import { useNavigate } from "react-router-dom";
 
 const ListEmployeeComponent = () => {
-  const [employees, setEmployees] = useState([]);
+  
+    const [employees, setEmployees] = useState([]);
 
   const navigator = useNavigate();
 
-  const addNewEmployee = () => {
-    navigator("/add-employee");
-  };
+  const addNewEmployee = () => navigator("/add-employee");
+
 
   useEffect(() => {
     listEmployees()
