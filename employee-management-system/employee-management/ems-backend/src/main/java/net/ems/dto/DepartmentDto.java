@@ -13,8 +13,8 @@ public class DepartmentDto {
 
     private Long id;
 
-    private String name;
+    private String departmentName;
 
-    private String description;
+    private String departmentDescription;
 
 }
