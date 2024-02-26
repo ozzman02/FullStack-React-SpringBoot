@@ -12,14 +12,6 @@ const ListEmployeeComponent = () => {
 
     const updateEmployee = (id) => navigator(`/edit-employee/${id}`);
 
-    const getAllEmployees = () => {
-        listEmployees()
-            .then((response) => { setEmployees(response.data);
-        }).catch((error) => {
-            console.error(error);
-        });
-    }
-
     const removeEmployee = (id) => {
         deleteEmployee(id).then((response) => { 
             console.log("Was the employee with id: " + id + " deleted? " + response.data);
@@ -27,6 +19,14 @@ const ListEmployeeComponent = () => {
         }).catch(error => {
             console.log(error);
         })
+    }
+    
+    const getAllEmployees = () => {
+        listEmployees()
+            .then((response) => { setEmployees(response.data);
+        }).catch((error) => {
+            console.error(error);
+        });
     }
 
     useEffect(() => {

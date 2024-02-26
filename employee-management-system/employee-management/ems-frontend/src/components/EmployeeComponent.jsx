@@ -4,11 +4,11 @@ import { useNavigate, useParams } from "react-router-dom"
 
 const EmployeeComponent = () => {
 
-    const [firstName, setFirstName] = useState("")
+    const [firstName, setFirstName] = useState("");
 
-    const [lastName, setLastName] = useState("")
+    const [lastName, setLastName] = useState("");
     
-    const [email, setEmail] = useState("")
+    const [email, setEmail] = useState("");
 
     const navigator = useNavigate();
 
