@@ -2,8 +2,11 @@ package net.ems.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import net.ems.dto.EmployeeDto;
+import net.ems.entity.Department;
+import net.ems.entity.Employee;
 import net.ems.exception.ResourceNotFoundException;
 import net.ems.mapper.EmployeeMapper;
+import net.ems.repository.DepartmentRepository;
 import net.ems.repository.EmployeeRepository;
 import net.ems.service.EmployeeService;
 import org.springframework.stereotype.Service;
@@ -20,9 +23,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
+    private final DepartmentRepository departmentRepository;
+
     @Override
     public EmployeeDto createEmployee(EmployeeDto employeeDto) {
-        return mapToEmployeeDto(employeeRepository.save(mapToEmployee(employeeDto)));
+        Employee employee = mapToEmployee(employeeDto);
+        employee.setDepartment(findDepartmentById(employeeDto.getDepartmentId()));
+        return mapToEmployeeDto(employeeRepository.save(employee));
     }
 
     @Override
@@ -45,6 +52,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             existingEmployee.setFirstName(employeeDto.getFirstName());
             existingEmployee.setLastName(employeeDto.getLastName());
             existingEmployee.setEmail(employeeDto.getEmail());
+            existingEmployee.setDepartment(findDepartmentById(employeeDto.getDepartmentId()));
             return mapToEmployeeDto(employeeRepository.save(existingEmployee));
         }).orElseThrow(
                 () -> new ResourceNotFoundException("Employee with id " + employeeId + " does not exist")
@@ -59,6 +67,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         } else {
             throw new ResourceNotFoundException("Employee with id " + employeeId + " does not exist");
         }
+    }
+
+    private Department findDepartmentById(Long departmentId) {
+        return departmentRepository.findById(departmentId)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Department with id " + departmentId + "does not exist")
+                );
     }
 
 }
