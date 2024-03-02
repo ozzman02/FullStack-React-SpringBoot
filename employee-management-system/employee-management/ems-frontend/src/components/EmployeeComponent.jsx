@@ -194,7 +194,7 @@ const EmployeeComponent = () => {
                                     }   
                                 </select>
                                 { errors.department && <div className='invalid-feedback'> { errors.department} </div> }
-                        </div>
+                            </div>
                             <button className="btn btn-success" onClick={saveOrUpdateEmployee}>Submit</button>
                         </form>
                     </div>
