@@ -1,4 +1,4 @@
-package net.ossant.configuration;
+package net.ossant.configuration.mapper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
