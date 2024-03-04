@@ -20,4 +20,14 @@ public class ApplicationExceptionHandler {
         return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(value = {TodoAPIException.class})
+    public ResponseEntity<ErrorMessage> todoApiExceptionHandler(
+            TodoAPIException ex,
+            WebRequest request) {
+        ErrorMessage errorMessage = new ErrorMessage(
+                HttpStatus.BAD_REQUEST, LocalDateTime.now(), ex.getMessage(), "User already exists");
+        return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+    }
+
+
 }
