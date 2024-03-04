@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static net.ossant.constants.ApplicationConstants.*;
 
-@CrossOrigin(ALLOWED_CROSS_ORIGINS)
+//@CrossOrigin(ALL)
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(TODO_BASE_URL)

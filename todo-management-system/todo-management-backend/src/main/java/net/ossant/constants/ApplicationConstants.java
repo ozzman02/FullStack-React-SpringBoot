@@ -2,11 +2,15 @@ package net.ossant.constants;
 
 public class ApplicationConstants {
 
-    public final static String ALLOWED_CROSS_ORIGINS = "*";
+    public static final String REACT_APP_ORIGIN = "http://localhost:3000";
+
+    public static final String ALL = "*";
 
     public final static String TODO_BASE_URL = "api/todos";
 
     public final static String AUTHORIZATION_BASE_URL = "api/auth";
+
+    public static final Long MAX_AGE = 3600L;
 
     public final static String REGISTRATION_URL = "/register";
 

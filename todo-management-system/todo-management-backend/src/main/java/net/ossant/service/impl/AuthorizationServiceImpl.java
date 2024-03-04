@@ -57,9 +57,9 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
     @Override
     public String login(LoginDto loginDto) {
-        Authentication authentication = appAuthenticationProvider
-                .authenticate(new UsernamePasswordAuthenticationToken(
-                        loginDto.getUsernameOrEmail(),
+
+        Authentication authentication = appAuthenticationProvider.authenticate(
+                new UsernamePasswordAuthenticationToken(loginDto.getUsernameOrEmail(),
                         loginDto.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
