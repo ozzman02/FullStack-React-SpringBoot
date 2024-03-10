@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react"
-import { login, storeToken } from "../services/AuthorizationService"
+import { login, storeToken, saveLoggedInUser } from "../services/AuthorizationService"
 import { useNavigate } from "react-router-dom"
 
 const LoginComponent = () => {
@@ -11,12 +11,14 @@ const LoginComponent = () => {
 
     const navigate = useNavigate()
 
-    const handleLoginForm = (e) => {
+    const handleLoginForm = async (e) => {
         e.preventDefault();
-        login(username, password).then((response) => {
+        await login(username, password).then((response) => {
             const token = "Basic " + window.btoa(username + ":" + password);
             storeToken(token);
+            saveLoggedInUser(username);
             navigate("/todos");
+            window.location.reload(false);
         }).catch(error => {
             console.error(error)
         })
