@@ -7,7 +7,7 @@ import net.ossant.entity.User;
 import net.ossant.exception.TodoAPIException;
 import net.ossant.repository.RoleRepository;
 import net.ossant.repository.UserRepository;
-import net.ossant.security.provider.AppAuthenticationProvider;
+import net.ossant.security.authentication.AppAuthenticationProvider;
 import net.ossant.service.AuthorizationService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

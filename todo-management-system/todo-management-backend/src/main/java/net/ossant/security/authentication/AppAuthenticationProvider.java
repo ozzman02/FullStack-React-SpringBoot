@@ -1,4 +1,4 @@
-package net.ossant.security.provider;
+package net.ossant.security.authentication;
 
 import lombok.RequiredArgsConstructor;
 import net.ossant.repository.UserRepository;

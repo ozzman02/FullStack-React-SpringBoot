@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static net.ossant.constants.ApplicationConstants.*;
 
-//@CrossOrigin(ALL)
 @RestController
 @RequestMapping(AUTHORIZATION_BASE_URL)
 @RequiredArgsConstructor

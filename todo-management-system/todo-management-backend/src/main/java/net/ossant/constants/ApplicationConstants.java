@@ -12,6 +12,22 @@ public class ApplicationConstants {
 
     public static final Long MAX_AGE = 3600L;
 
+    public static final String BEARER = "Bearer ";
+
+    public static final Integer BEARER_PREFIX_LENGTH = 7;
+
+    public static final String JWT_KEY = "fdc46a23a4dff99a8c9b4cb41ba271864b3307f5d7e643213159cf224a60b9ed";
+
+    public static final String JWT_ISSUER = "Todo Management";
+
+    public static final String USERNAME_OR_EMAIL_CLAIM = "username";
+
+    public static final String AUTHORITIES_CLAIM = "authorities";
+
+    public static final String JWT_SUBJECT = "JWT Token";
+
+    public static final Long JWT_EXPIRATION = 604800000L;
+
     public final static String REGISTRATION_URL = "/register";
 
     public final static String LOGIN_URL = "/login";
