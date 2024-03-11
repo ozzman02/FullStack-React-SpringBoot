@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react"
 import { deleteTodo, getAllTodos, completeTodo, incompleteTodo } from "../services/TodoService"
 import { useNavigate } from "react-router-dom"
+import { isAdminUser } from "../services/AuthorizationService"
 
 const ListTodoComponent = () => {
     
@@ -46,6 +47,8 @@ const ListTodoComponent = () => {
             console.log(error);
         })
     }
+
+    const isAdmin = isAdminUser();
     
     useEffect(() => {
         listAllTodos();
@@ -54,7 +57,9 @@ const ListTodoComponent = () => {
     return (
         <div className="container">
             <h2 className="text-center">List of Todos</h2>
-            <button className="btn btn-primary mb-2" onClick={addNewTodo}>Add Todo</button>
+            { 
+                isAdmin  && <button className="btn btn-primary mb-2" onClick={addNewTodo}>Add Todo</button>
+            }
             <div>
                 <table className="table table-bordered table-striped">
                     <thead>
@@ -73,17 +78,25 @@ const ListTodoComponent = () => {
                                     <td>{todo.description}</td>
                                     <td>{todo.completed ? 'YES' : 'NO'}</td>
                                     <td>
-                                        <button 
-                                            className="btn btn-info" 
-                                            onClick={() => updateTodo(todo.id)}
-                                        >Update
-                                        </button>
-                                        <button 
-                                            className="btn btn-danger" 
-                                            onClick={() => removeTodo(todo.id)} 
-                                            style={{marginLeft: "10px"}}
-                                        >Delete
-                                        </button>
+                                        {
+                                            isAdmin &&
+                                            <button 
+                                                className="btn btn-info" 
+                                                onClick={() => updateTodo(todo.id)}
+                                            >
+                                                Update
+                                            </button>
+                                        }
+                                        {
+                                            isAdmin &&
+                                            <button 
+                                                className="btn btn-danger" 
+                                                onClick={() => removeTodo(todo.id)} 
+                                                style={{marginLeft: "10px"}}
+                                            >
+                                                Delete
+                                            </button>
+                                        }
                                         <button 
                                             className="btn btn-success" 
                                             onClick={() => markTodoAsComplete(todo.id)} 

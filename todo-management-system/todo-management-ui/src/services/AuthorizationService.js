@@ -14,19 +14,25 @@ export const getToken = () => localStorage.getItem("token");
     The difference between session storage and local storage is t
     hat local storage does not have an expiration date 
 */
-export const saveLoggedInUser = (username) => sessionStorage.setItem("authenticatedUser", username);
+export const saveLoggedInUser = (username, role) => {
+    sessionStorage.setItem("authenticatedUser", username);
+    sessionStorage.setItem("role", role);
+}
 
 export const isUserLoggedIn = () => {
     if (sessionStorage.getItem("authenticatedUser") == null) {
-        console.log("User is not logged in");
         return false;
     } else {
-        console.log("User is logged in");
         return true;
     }
 }
 
 export const getLoggedInUser = () => sessionStorage.getItem("authenticatedUser");
+
+export const isAdminUser = () => {
+    let role = sessionStorage.getItem("role"); 
+    return role != null && role === 'ROLE_ADMIN'
+}
 
 export const logout = () => {
     localStorage.clear();
