@@ -1,6 +1,7 @@
 package net.ossant.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import net.ossant.dto.JwtAuthResponse;
 import net.ossant.dto.LoginDto;
 import net.ossant.dto.RegisterDto;
 import net.ossant.entity.User;
@@ -57,7 +58,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     }
 
     @Override
-    public String login(LoginDto loginDto) {
+    public JwtAuthResponse login(LoginDto loginDto) {
 
         Authentication authentication = appAuthenticationProvider.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDto.getUsernameOrEmail(),
@@ -65,7 +66,10 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return TokenUtil.generateToken(authentication);
+        String token = TokenUtil.generateToken(authentication);
+        String role = TokenUtil.getRoles(token);
+
+        return new JwtAuthResponse(token, role);
     }
 
 }

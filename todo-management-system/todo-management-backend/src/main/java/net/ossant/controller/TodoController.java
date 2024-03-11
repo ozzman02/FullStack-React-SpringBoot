@@ -54,7 +54,7 @@ public class TodoController {
     }
 
     @PatchMapping(INCOMPLETE_TODO_URL)
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<?> incompleteTodo(@PathVariable Long id) {
         return new ResponseEntity<>(todoService.incompleteTodo(id), HttpStatus.OK);
     }

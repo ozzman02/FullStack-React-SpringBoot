@@ -1,7 +1,6 @@
 package net.ossant.controller;
 
 import lombok.RequiredArgsConstructor;
-import net.ossant.dto.JwtAuthResponse;
 import net.ossant.dto.LoginDto;
 import net.ossant.dto.RegisterDto;
 import net.ossant.service.AuthorizationService;
@@ -28,7 +27,7 @@ public class AuthorizationController {
 
     @PostMapping(LOGIN_URL)
     public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
-        return new ResponseEntity<>(new JwtAuthResponse(authorizationService.login(loginDto)), HttpStatus.OK);
+        return new ResponseEntity<>(authorizationService.login(loginDto), HttpStatus.OK);
     }
 
 }

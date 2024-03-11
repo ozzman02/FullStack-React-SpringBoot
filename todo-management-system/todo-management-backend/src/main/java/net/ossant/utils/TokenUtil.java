@@ -37,6 +37,16 @@ public class TokenUtil {
                 .toString();
     }
 
+    public static String getRoles(String token) {
+        return Jwts.parser()
+                .verifyWith(getKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .get(AUTHORITIES_CLAIM)
+                .toString();
+    }
+
     public static boolean validateToken(String token) {
         Jwts.parser()
                 .verifyWith(getKey())
