@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static net.ossant.utils.ApplicationUtil.todoNotFoundErrorMessage;
+import static net.ossant.utils.ErrorBuilderUtil.todoNotFoundErrorMessage;
 
 @Service
 @RequiredArgsConstructor

@@ -1,8 +1,7 @@
 package net.ossant.configuration.security;
 
 import lombok.RequiredArgsConstructor;
-import net.ossant.security.filter.JWTTokenGeneratorFilter;
-import net.ossant.security.filter.JWTTokenValidatorFilter;
+import net.ossant.security.filter.JWTAuthenticationFilter;
 import net.ossant.security.jwt.JwtAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -61,8 +60,7 @@ public class SecurityConfiguration {
                     corsConfiguration.setMaxAge(MAX_AGE);
                     return corsConfiguration;
                 })).csrf(AbstractHttpConfigurer::disable)
-                .addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
-                .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
+                .addFilterBefore(new JWTAuthenticationFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().authenticated()

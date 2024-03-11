@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static net.ossant.utils.ApplicationUtil.badCredentialsErrorMessage;
-import static net.ossant.utils.ApplicationUtil.userNotFoundErrorMessage;
+import static net.ossant.utils.ErrorBuilderUtil.badCredentialsErrorMessage;
+import static net.ossant.utils.ErrorBuilderUtil.userNotFoundErrorMessage;
 
 @Component
 @RequiredArgsConstructor

@@ -9,6 +9,7 @@ import net.ossant.repository.RoleRepository;
 import net.ossant.repository.UserRepository;
 import net.ossant.security.authentication.AppAuthenticationProvider;
 import net.ossant.service.AuthorizationService;
+import net.ossant.utils.TokenUtil;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,8 +18,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
-import static net.ossant.utils.ApplicationUtil.todoApiEmailErrorMessage;
-import static net.ossant.utils.ApplicationUtil.todoApiUsernameErrorMessage;
+import static net.ossant.utils.ErrorBuilderUtil.todoApiEmailErrorMessage;
+import static net.ossant.utils.ErrorBuilderUtil.todoApiUsernameErrorMessage;
 
 @Service
 @RequiredArgsConstructor
@@ -64,7 +65,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return "User successfully logged in";
+        return TokenUtil.generateToken(authentication);
     }
 
 }

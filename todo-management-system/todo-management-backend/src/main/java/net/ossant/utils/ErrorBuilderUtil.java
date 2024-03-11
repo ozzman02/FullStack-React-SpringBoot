@@ -2,7 +2,7 @@ package net.ossant.utils;
 
 import static net.ossant.constants.ApplicationConstants.*;
 
-public class ApplicationUtil {
+public class ErrorBuilderUtil {
 
     public static String todoNotFoundErrorMessage(Long todoId) {
         return String.format(TODO_BY_ID_NOT_FOUND_ERROR_MESSAGE, todoId);
